@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
-import '../../features/presentations/views/boarding_view.dart';
-import '../../features/presentations/views/widgets/boarding_view_body.dart';
+
+import '../../features/onboardingscreen/presentations/views/boarding_view.dart';
 
 
 abstract class AppRouter {
@@ -20,10 +20,10 @@ abstract class AppRouter {
           path: '/',
           builder: (context, state) => const BoardingView()
         ),
-        GoRoute(
-            path:kBoardingView,
-            builder: (context, state) => const BoardingView()
-        ),
+        // GoRoute(
+        //     path:kBoardingView,
+        //     builder: (context, state) => const BoardingView()
+        // ),
         // GoRoute(
         //   path: kLogin,
         //   builder: (context, state) => const LoginScreen(),
