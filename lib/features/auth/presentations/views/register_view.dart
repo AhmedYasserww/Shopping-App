@@ -1,10 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shoping_app/core/utils/app_router.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_button_details.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_email_text_field.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_log_in_navigation.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_password_text_field.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_phone_number_text_field.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/cutom_name_text_field.dart';
+
+import '../../data/save_data.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -59,20 +64,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 30),
-                SizedBox(
+                const SizedBox(
                     height: 160,
                     width: 286,
                     child:
                         Image(image: AssetImage("assets/images/register.jpg"))),
-                SizedBox(
+               const SizedBox(
                   height: 21,
                 ),
                 NameField(nameController: nameController),
-                SizedBox(
+               const SizedBox(
                   height: 21,
                 ),
                 PhoneNumberField(nameController: phoneNumberController),
-                SizedBox(
+               const SizedBox(
                   height: 21,
                 ),
                 EmailField(emailController: emailController),
@@ -88,35 +93,86 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 21),
                 CustomButtonDetails(
-                  onTap: () {},
+                  //onTap: () {},
                   globalKey: globalKey,
                   emailController: emailController,
                   passwordController: passwordController,
                   text: "Register",
-                  /* onTap: () async {
+                  onTap: () async {
                     if (globalKey.currentState!.validate()) {
                       try {
-                        await FirebaseAuth.instance
+                        print("###########################");
+                        print("###########################");
+                        print("Before saving data");
+                        await saveUserData(
+                          name: nameController.text,
+                          email: emailController.text,
+                          phoneNumber: phoneNumberController.text,
+                          password: passwordController.text,
+                        );
+                        print("###########################");
+                        print("###########################");
+                        print("After saving data");
+
+                        Map<String, String?> userData = await getUserData();
+                        print("###########################");
+                        print("###########################");
+                        print("User data retrieved:");
+                        print(userData['name']);
+                        print(userData['email']);
+                        print(userData['phoneNumber']);
+                        print(userData['password']);
+
+                        UserCredential userCredential = await FirebaseAuth
+                            .instance
                             .createUserWithEmailAndPassword(
                           email: emailController.text,
                           password: passwordController.text,
                         );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Verification email sent! Please check your inbox.'),
-                          ),
-                        );
+                        print("User registered");
+
+                        User? user = userCredential.user;
+                        if (user != null && !user.emailVerified) {
+                          await user.sendEmailVerification();
+                          print("###########################");
+                          print("###########################");
+                          print("Verification email sent");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                  'Verification email sent! Please check your inbox.'),
+                            ),
+                          );
+                          GoRouter.of(context).push(AppRouter.kLogin);
+                        }
                       } catch (e) {
+                        print("Error during registration: ${e.toString()}");
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Registration failed: ${e.toString()}'),
+                            content:
+                                Text('Registration failed: ${e.toString()}'),
                           ),
                         );
                       }
                     }
-                  },*/
-                ),
 
+                    // await saveUserData(
+                    //   name: nameController.text,
+                    //   email: emailController.text,
+                    //   phoneNumber: phoneNumberController.text,
+                    //   password: passwordController.text,
+                    // );
+
+// To retrieve and display data on the profile screen
+                    Map<String, String?> userData = await getUserData();
+                    print("###########################");
+                    print("###########################");
+
+                    print(
+                        userData['name']); // Display or use the data as needed
+                    print("###########################");
+                  },
+                ),
                 const LoginNavigation(),
                 TextButton(
                   onPressed: () {},

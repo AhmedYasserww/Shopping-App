@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shoping_app/features/auth/presentations/views/register_view.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_button_details.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_email_text_field.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_password_text_field.dart';
+
+import '../../../../core/utils/app_router.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -77,7 +81,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 ),
                 const SizedBox(height: 30,),
                 CustomButtonDetails(
-               /*   onTap: () async {
+                  onTap: () async {
                     if (globalKey.currentState!.validate()) {
                       try {
                         UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -86,27 +90,33 @@ class _LogInScreenState extends State<LogInScreen> {
                         );
 
                         User? user = userCredential.user;
-                        if (user != null && user.emailVerified) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Log in successful'),
-                            ),
-                          );
+                        if (user != null) {
+                          if (!user.emailVerified) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text('Email not verified. Please check your email for verification.'),
+                                action: SnackBarAction(
+                                  label: 'Resend Verification',
+                                  onPressed: () async {
+                                    await user.sendEmailVerification();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Verification email resent!'),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Log in successful'),
+                              ),
+                            );
 
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: const Text(
-                                'Email not verified. Please check your email for verification',
-                              ),
-                              action: SnackBarAction(
-                                label: 'Resend Verification',
-                                onPressed: () async {
-                                  await user?.sendEmailVerification();
-                                },
-                              ),
-                            ),
-                          );
+                             GoRouter.of(context).push(AppRouter.kNavigationBar);
+                          }
                         }
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -116,11 +126,12 @@ class _LogInScreenState extends State<LogInScreen> {
                         );
                       }
                     }
-                  },*/
+                  },
+
                   globalKey: globalKey,
                   emailController: emailController,
                   passwordController: passwordController,
-                  text: "Log In", onTap: () {  },
+                  text: "Log In",
                 ),
                 const SizedBox(height: 15,),
                 Row(
