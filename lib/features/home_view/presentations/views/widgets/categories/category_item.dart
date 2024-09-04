@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/utils/styles.dart';
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key});
-
+  const CategoryItem({super.key,required this.category});
+final String  category;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,7 +16,9 @@ class CategoryItem extends StatelessWidget {
           color: Colors.blue,
           width: 150.w,
           height: 50.h,
-          child: Text("Beauty", style: Styles.textStyle20,),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+              child: Text(category, style: Styles.textStyle20,)),
         ),
       ),
     );

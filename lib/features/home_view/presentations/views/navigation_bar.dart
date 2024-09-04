@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:shoping_app/features/home_view/data/repo/home_repo_impl.dart';
 import 'package:shoping_app/features/home_view/presentations/views/home_view.dart';
+
+import '../../data/repo/home_repo.dart';
 class NavigationBar extends StatefulWidget {
   const NavigationBar({super.key});
-
   @override
   State<NavigationBar> createState() => _NavigationBarState();
 }
 
 class _NavigationBarState extends State<NavigationBar> {
   int selectedIndex = 0 ;
+
   List<Widget> views = [
-    const HomeView(),
+    HomeView(),
     Container(child: Text("card"),)
    // const CartView(),
     //const FavoriteView()
