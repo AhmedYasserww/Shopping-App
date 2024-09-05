@@ -5,6 +5,6 @@ class CategoryDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CategoryDetailsViewBody();
+    return const CategoryDetailsViewBody(category: '',);
   }
 }

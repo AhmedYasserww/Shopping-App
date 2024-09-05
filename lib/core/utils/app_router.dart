@@ -4,6 +4,7 @@ import 'package:shoping_app/features/auth/presentations/views/register_view.dart
 import 'package:shoping_app/features/home_view/presentations/views/category_details_view.dart';
 import 'package:shoping_app/features/home_view/presentations/views/home_view.dart';
 import 'package:shoping_app/features/home_view/presentations/views/navigation_bar.dart';
+import '../../features/home_view/presentations/views/widgets/categories/category_details_view_body.dart';
 import '../../features/onboardingscreen/presentations/views/boarding_view.dart';
 
 abstract class AppRouter {
@@ -42,8 +43,12 @@ abstract class AppRouter {
             builder: (context, state) => const NavigationBar()
         ),
         GoRoute(
-            path: kCategoryDetailsView,
-            builder: (context, state) => const CategoryDetailsView()
+          path: kCategoryDetailsView,
+          builder: (context, state) {
+            // Retrieve the `extra` parameter from the route state
+            final category = state.extra as String?;
+            return CategoryDetailsViewBody(category: category!);
+          },
         ),
 
       ]);

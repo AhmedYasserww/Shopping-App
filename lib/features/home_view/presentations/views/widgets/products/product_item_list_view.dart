@@ -11,7 +11,10 @@ class ProductItemListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: 20,
           itemBuilder: (context,i){
-            return ProductItem();
+            return Container();
+            // return ProductItem(
+            //   productModel: ,
+            // );
           }),
     );
   }

@@ -10,18 +10,22 @@ class FetchAllCategoriesCubit extends Cubit<List<String>> {
 
   Future<void> getAllCategories() async {
     print('Fetching all categories');
-    final Either<Failure, List<String>> result = await homeRepo.fetchAllCategories();
-    result.fold(
-          (failure) {
-        // Handle the failure case, maybe emit an empty list or show an error
-        print('Error: ${failure.errorMessage}');
-        emit([]);
-      },
-          (categories) {
-        // Emit the list of categories if successful
-        print('Categories fetched successfully: $categories');
-        emit(categories);
-      },
-    );
+    try {
+      final Either<Failure, List<String>> result = await homeRepo.fetchAllCategories();
+      result.fold(
+            (failure) {
+          // Handle the failure case, maybe emit an empty list or show an error
+          print('Error: ${failure.errorMessage}');
+          emit([]);
+        },
+            (categories) {
+          // Emit the list of categories if successful
+          print('Categories fetched successfully: $categories');
+          emit(categories);
+        },
+      );
+    } on Exception catch (e) {
+      print(e.toString());
+    }
   }
 }
