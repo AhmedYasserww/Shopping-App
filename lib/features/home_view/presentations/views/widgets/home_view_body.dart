@@ -50,7 +50,7 @@ class HomeViewBody extends StatelessWidget {
                const CategoryItemListView(),
                 const SizedBox(height: 20,),
                 Text("Top Products",style:Styles.textStyle24,),
-               // const SizedBox(height: 20,),
+                const SizedBox(height: 16,),
                 const Expanded(child: ProductItemListView()),
                // SizedBox(height: 16,)
               ],

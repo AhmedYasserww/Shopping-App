@@ -39,6 +39,7 @@ dependencies:
   firebase_auth: ^5.2.0
   shared_preferences: ^2.0.13
   get_it: ^7.7.0
+  smooth_page_indicator: ^1.0.0
 
   flutter:
     sdk: flutter
