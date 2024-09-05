@@ -35,21 +35,22 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<ProductModel>>> fetchSpecificProduct({required String category})async {
+  Future<Either<Failure, List<ProductModel>>> fetchSpecificProduct(
+      {required String category}) async {
     try {
       var data = await apiService.get(endPoint: 'products/category/$category');
       print("returned data successfully $data");
-      List <ProductModel>books = [];
+      List <ProductModel>product = [];
       if (data['products'] != null) {
         for (var i in data['products']) {
-          books.add(ProductModel.fromJson(i));
+          product.add(ProductModel.fromJson(i));
         }
       }
 
       else {
         return Left(ServerFailure(errorMessage: "no item found "));
       }
-      return right(books);
+      return right(product);
     } on Exception catch (e) {
       if (e is DioError) {
         print("dioErrorException${e.message}");
@@ -57,5 +58,30 @@ class HomeRepoImpl implements HomeRepo {
       return Left(ServerFailure(errorMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<ProductModel>>> fetchTopProduct() async {
+    try {
+      var data = await apiService.get(
+          endPoint: 'products?limit=30&skip=74&select=title,price,description,thumbnail');
+      print("returned data successfully $data");
+      List <ProductModel>product = [];
+      if (data['products'] != null) {
+        for (var i in data['products']) {
+          product.add(ProductModel.fromJson(i));
+        }
+      }
+
+      else {
+        return Left(ServerFailure(errorMessage: "no item found "));
+      }
+      return right(product);
+    } on Exception catch (e) {
+      if (e is DioError) {
+        print("dioErrorException${e.message}");
+      }
+      return Left(ServerFailure(errorMessage: e.toString()));
+    }
   }
+}
 

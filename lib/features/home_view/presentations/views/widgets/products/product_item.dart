@@ -4,7 +4,7 @@ import 'package:shoping_app/features/home_view/presentations/views/widgets/add_t
 import '../../../../data/models/ProductModel.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({super.key,this.maxLineOfDesc=1, this.heightOfImage=135, required this.productModel});
+  const ProductItem({super.key,this.maxLineOfDesc=1, this.heightOfImage=145, required this.productModel});
 final int maxLineOfDesc ;
 final double heightOfImage ;
 final ProductModel productModel;

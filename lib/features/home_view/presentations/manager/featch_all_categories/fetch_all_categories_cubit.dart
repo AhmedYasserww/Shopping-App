@@ -14,7 +14,6 @@ class FetchAllCategoriesCubit extends Cubit<List<String>> {
       final Either<Failure, List<String>> result = await homeRepo.fetchAllCategories();
       result.fold(
             (failure) {
-          // Handle the failure case, maybe emit an empty list or show an error
           print('Error: ${failure.errorMessage}');
           emit([]);
         },
