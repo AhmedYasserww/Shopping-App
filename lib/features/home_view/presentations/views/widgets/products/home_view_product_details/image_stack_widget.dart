@@ -21,7 +21,7 @@ class ImageStackWidget extends StatelessWidget {
       children: [
         SizedBox(
           width: width,
-          height: height * 0.4,
+          height: height * 0.44,
           child: PageView(
             controller: pageController,
             children: images
@@ -48,6 +48,7 @@ class ImageStackWidget extends StatelessWidget {
             ),
           ),
         ),
+
         const CustomAppbarForProductDetails(),
       ],
     );

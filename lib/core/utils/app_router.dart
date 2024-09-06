@@ -1,9 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:shoping_app/features/auth/presentations/views/log_in_view.dart';
 import 'package:shoping_app/features/auth/presentations/views/register_view.dart';
+import 'package:shoping_app/features/home_view/data/models/ProductModel.dart';
 import 'package:shoping_app/features/home_view/presentations/views/home_view.dart';
 import 'package:shoping_app/features/home_view/presentations/views/navigation_bar.dart';
-import 'package:shoping_app/features/home_view/presentations/views/widgets/products/product_details_view_body.dart';
+import 'package:shoping_app/features/home_view/presentations/views/widgets/products/home_view_product_details/product_details_view_body.dart';
 import '../../features/home_view/presentations/views/product_details_view.dart';
 import '../../features/home_view/presentations/views/widgets/categories/category_details_view_body.dart';
 import '../../features/onboardingscreen/presentations/views/boarding_view.dart';
@@ -48,8 +49,11 @@ abstract class AppRouter {
           },
         ),
         GoRoute(
-            path: kProductDetailsView,
-            builder: (context, state) => const ProductDetailsView()
+          path: AppRouter.kProductDetailsView,
+          builder: (context, state) {
+            final productModel = state.extra as ProductModel;
+            return ProductDetailsViewBody(productModel: productModel);
+          },
         ),
 
       ]);

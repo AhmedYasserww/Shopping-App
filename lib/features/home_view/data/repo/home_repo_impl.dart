@@ -63,7 +63,7 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, List<ProductModel>>> fetchTopProduct() async {
     try {
       var data = await apiService.get(
-          endPoint: 'products?limit=30&skip=74&select=title,price,description,thumbnail');
+          endPoint: 'products?limit=30&skip=74');
       print("returned data successfully $data");
       List <ProductModel>product = [];
       if (data['products'] != null) {

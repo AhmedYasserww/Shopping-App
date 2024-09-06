@@ -3,12 +3,16 @@ import 'package:shoping_app/core/utils/styles.dart';
 import 'package:shoping_app/features/home_view/presentations/views/widgets/products/home_view_product_details/product_details_tile.dart';
 import 'package:shoping_app/features/home_view/presentations/views/widgets/products/home_view_product_details/bottom_add_to_cart.dart';
 
+import '../../../../../data/models/ProductModel.dart';
+import 'comment_section_of_product_details.dart';
+
 class DescOfProductDetails extends StatelessWidget {
-const DescOfProductDetails({super.key});
+const DescOfProductDetails({super.key, required this.productModel});
+final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding:  EdgeInsets.all(15.0),
+      padding:  const EdgeInsets.all(15.0),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,21 +24,21 @@ const DescOfProductDetails({super.key});
                   style:  Styles.textStyle24
                              ),
                  Text(
-                     "25 Є",
+                     productModel.price.toString(),
                      style:  Styles.textStyle20.copyWith(color: Colors.blue)
                  ),
                ],
              ),
              const SizedBox(height: 8),
             Text(
-              "t_shirt sss aa",
+              productModel.title,
               style:  Styles.textStyle20.copyWith(fontWeight: FontWeight.w500),
             ),
 
             const SizedBox(height: 16),
-            const ProductDetailsTile(
+             ProductDetailsTile(
               title: 'description',
-              description: "zz xx ccccs i want to go to the scool aa xx cddvf "
+              description: productModel.description??" "
             ),
              const SizedBox(height: 16),
             Row(
@@ -44,10 +48,10 @@ const DescOfProductDetails({super.key});
                   style:Styles.textStyle24.copyWith(fontWeight: FontWeight.w600,),
                   // Example usage
                 ),
-                Text("brant zare",style:  Styles.textStyle20.copyWith(fontWeight: FontWeight.w500,))
+                Text(productModel.category??" ",style:  Styles.textStyle20.copyWith(fontWeight: FontWeight.w500,))
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
 
             Row(
               children: [
@@ -56,31 +60,26 @@ const DescOfProductDetails({super.key});
                   style:Styles.textStyle24.copyWith(fontWeight: FontWeight.w600)  ,
                   // Example usage
                 ),
-                Text("brant zare",style:  Styles.textStyle20.copyWith(fontWeight: FontWeight.w500))
+                Text(productModel.brand??" ",style:  Styles.textStyle20.copyWith(fontWeight: FontWeight.w500))
               ],
             ),
-             SizedBox(height: 20),
+             const SizedBox(height: 20),
             Center(
-              child: SizedBox(
+              child:  SizedBox(
                 height: 150,
-                  child: Image.network("https://assets.dummyjson.com/public/qr-code.png")),
+                child: productModel.meta != null
+                    ? Image.network(productModel.meta!.qrCode.toString()) // Use ! since meta is checked for null
+                    : const Center(child: Text("QR Code not available")),
+              ),
             ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text(
-                  "Comment ",
-                  style:Styles.textStyle24.copyWith(fontWeight: FontWeight.w600)  ,
-                  // Example usage
-                ),
-                Text("brant zare",style:  Styles.textStyle20.copyWith(fontWeight: FontWeight.w500))
-              ],
-            ),
-            SizedBox(height: 20,),
-            BottomAddToCart(),
+            const SizedBox(height: 20),
+            CommentsSectionOfProductDetails(productModel:productModel),
+            const SizedBox(height: 20,),
+            const BottomAddToCart(),
           ],
         ),
       ),
     );
   }
 }
+

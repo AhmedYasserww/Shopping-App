@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shoping_app/core/utils/styles.dart';
-import 'package:shoping_app/features/home_view/data/models/ProductModel.dart';
 import 'package:shoping_app/features/home_view/data/repo/home_repo_impl.dart';
 import 'package:shoping_app/features/home_view/presentations/manager/featch_all_categories/fetch_all_categories_cubit.dart';
 import 'package:shoping_app/features/home_view/presentations/manager/fetch_top_products/fetch_top_products_cubit.dart';
@@ -13,10 +12,7 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeRepoImpl = GetIt.instance.get<HomeRepoImpl>();
-// BlocProvider(
-//           create: (context) => FetchAllBookCubit(getIt.get<HomeRepoImp>())..fetchAllBook(),
-//
-//         ),
+
     return  MultiBlocProvider(
       providers: [
         BlocProvider(

@@ -7,7 +7,7 @@ class ProductModel {
   final String title;
   final String? description;
   final String? category;
-  final double? price;
+  final double price;
   final double? discountPercentage;
   final double? rating;
   final int? stock;
@@ -31,7 +31,7 @@ class ProductModel {
     required this.title,
     this.description,
     this.category,
-    this.price,
+   required this.price,
     this.discountPercentage,
     this.rating,
     this.stock,
