@@ -15,8 +15,6 @@ class CommentsSectionOfProductDetails extends StatelessWidget {
           "Comments : ",
           style: Styles.textStyle24.copyWith(fontWeight: FontWeight.w600),
         ),
-
-
         if (productModel.reviews != null && productModel.reviews!.isNotEmpty)
 
           SizedBox(
