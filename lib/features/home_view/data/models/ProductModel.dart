@@ -1,8 +1,10 @@
+import 'package:shoping_app/features/favorite_view/data/models/product_faviorite_model.dart';
+
 import 'Dimensions.dart';
 import 'Reviews.dart';
 import 'Meta.dart';
 
-class ProductModel {
+class ProductModel extends ProductFavoriteModel{
   final int id;
   final String title;
   final String? description;
@@ -49,7 +51,7 @@ class ProductModel {
     this.meta,
     this.images,
     this.thumbnail,
-  });
+  }):super(image: thumbnail??" ",content:description?? " " ,title:title ,price:price ,productId :id);
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
