@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+part 'product_faviorite_model.g.dart';
 @HiveType(typeId: 0)
 class ProductFavoriteModel extends HiveObject{
   @HiveField(0)

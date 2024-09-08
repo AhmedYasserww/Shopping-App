@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoping_app/core/utils/styles.dart';
-class FavoriteItem extends StatelessWidget {
+import 'package:shoping_app/features/favorite_view/data/models/product_faviorite_model.dart';
+import 'package:shoping_app/features/favorite_view/presentation/manager/add_product_to_favorite_cubit.dart';
 
-  const FavoriteItem({super.key});
+class FavoriteItem extends StatelessWidget {
+  final ProductFavoriteModel product;
+
+  const FavoriteItem({required this.product, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +33,8 @@ class FavoriteItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: Image.network(
-              "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
-              ,width: 100,
+              product.image, // Use the product's image URL
+              width: 100,
               height: 100,
               fit: BoxFit.fill,
             ),
@@ -40,7 +45,7 @@ class FavoriteItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                 "Essence Mascara Lash Princess",
+                  product.title, // Use the product's title
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: const TextStyle(
@@ -51,23 +56,25 @@ class FavoriteItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+                  product.content, // Use the product's description
                   style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-
-                
                 Align(
                   alignment: Alignment.bottomRight,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("19.6r ",style:Styles.textStyle18,),
+                      Text(
+                        '${product.price} \$', // Concatenated price and currency
+                        style: Styles.textStyle18,
+                      ),
                       IconButton(
                         icon: const Icon(Icons.favorite, color: Colors.red),
                         onPressed: () {
-                      
+                          BlocProvider.of<AddProductToFavoriteCubit>(context)
+                              .toggleFavorite(product);
                         },
                       ),
                     ],

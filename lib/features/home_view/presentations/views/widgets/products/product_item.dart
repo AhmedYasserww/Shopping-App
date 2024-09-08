@@ -41,10 +41,10 @@ class ProductItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Positioned(
+                   Positioned(
                     bottom: 2,
                     right: 2,
-                    child: AddToFavoriteWidget(),
+                    child: AddToFavoriteWidget(favoriteModel: productModel,),
                   ),
                 ],
               ),

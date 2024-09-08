@@ -1,0 +1,1 @@
+const kFavoriteBox = "FavoriteBox";
