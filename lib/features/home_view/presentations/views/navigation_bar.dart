@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoping_app/features/home_view/presentations/views/home_view.dart';
 
+import '../../../cart_view/presentations/views/cart_view.dart';
 import '../../../favorite_view/presentation/views/faviorite_view.dart';
 class NavigationBar extends StatefulWidget {
   const NavigationBar({super.key});
@@ -12,9 +13,8 @@ class _NavigationBarState extends State<NavigationBar> {
 
   List<Widget> views = [
     HomeView(),
-    Container(child: Text("card"),),
+    CartView(),
     const FavoriteView(),
-   // const CartView(),
 
   ];
   @override
