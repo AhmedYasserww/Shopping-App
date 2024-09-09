@@ -8,38 +8,43 @@ import 'package:shoping_app/features/home_view/presentations/manager/fetch_speci
 import 'package:shoping_app/features/home_view/presentations/views/widgets/categories/category_details_bloc_builder.dart';
 
 import '../../../../data/repo/home_repo_impl.dart';
+
 class CategoryDetailsViewBody extends StatelessWidget {
-  const CategoryDetailsViewBody({super.key,required this.category});
+  const CategoryDetailsViewBody({super.key, required this.category});
   final String category;
   @override
   Widget build(BuildContext context) {
     final homeRepoImpl = GetIt.instance.get<HomeRepoImpl>();
 
     return BlocProvider(
-      create:(context) => FetchSpecificProductCubit(homeRepoImpl, category)..fetchSpecificProduct(),
+      create: (context) => FetchSpecificProductCubit(homeRepoImpl, category)..fetchSpecificProduct(),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue,
           centerTitle: true,
-          title: category != null ? Text(category,style: Styles.textStyle24,) : const Text('Category Details'),
+          title: category != null
+              ? Text(
+                  category,
+                  style: Styles.textStyle24,
+                )
+              : const Text('Category Details'),
         ),
-        body: BlocBuilder<FetchSpecificProductCubit,FetchSpecificProductState>(
-          builder: (context,state){
-            if(state is FetchSpecificProductSuccess){
-              return CategoryDetailsBlocBuilder(product: state.product,);
-            }
-            else if(state is FetchSpecificProductFailure){
-              return CustomErrorWidget(errorMessage: state.errorMessage,);
-            }
-            else{
+        body: BlocBuilder<FetchSpecificProductCubit, FetchSpecificProductState>(
+          builder: (context, state) {
+            if (state is FetchSpecificProductSuccess) {
+              return CategoryDetailsBlocBuilder(
+                product: state.product,
+              );
+            } else if (state is FetchSpecificProductFailure) {
+              return CustomErrorWidget(
+                errorMessage: state.errorMessage,
+              );
+            } else {
               return const CustomLoadingIndicator();
             }
           },
-             ),
+        ),
       ),
     );
   }
 }
-
-
-

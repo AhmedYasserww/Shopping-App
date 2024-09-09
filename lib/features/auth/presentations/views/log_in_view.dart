@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shoping_app/core/utils/styles.dart';
 import 'package:shoping_app/features/auth/presentations/views/register_view.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_button_details.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_email_text_field.dart';
@@ -137,17 +138,23 @@ class _LogInScreenState extends State<LogInScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Don't have an account ?",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(context,MaterialPageRoute(builder:(context)=>const RegisterScreen()),);
-                      },
+                    Expanded(
+                      flex: 2,
                       child: const Text(
-                        "Register",
-                        style: TextStyle(fontSize: 28,color: Colors.blue),
+                        "Don't have an account ?",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(context,MaterialPageRoute(builder:(context)=>const RegisterScreen()),);
+                        },
+                        child:  Text(
+                          "Register",
+                          style:Styles.textStyle20.copyWith(color: Colors.blue)
+                        ),
                       ),
                     ),
                   ],

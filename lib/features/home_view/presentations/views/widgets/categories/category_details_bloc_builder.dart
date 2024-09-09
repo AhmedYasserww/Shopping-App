@@ -6,22 +6,25 @@ class CategoryDetailsBlocBuilder extends StatelessWidget {
   final List<ProductModel>product;
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: product.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        childAspectRatio: .68,
-      ),
-      itemBuilder: (context, i) {
-        return   ProductItem(
-          productModel:product[i] ,
-          maxLineOfDesc: 2,
-          heightOfImage: 160,
-        );
-      },
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+      child: GridView.builder(
+        itemCount: product.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 0,
+          mainAxisSpacing: 10,
+          childAspectRatio: .58,
+        ),
+        itemBuilder: (context, i) {
+          return   ProductItem(
+            productModel:product[i] ,
+            maxLineOfDesc: 2,
+            heightOfImage: 160,
+          );
+        },
 
+      ),
     );
   }
 }

@@ -106,4 +106,8 @@ class AddProductToCartCubit extends Cubit<AddProductToCartState> {
       emit(AddProductToCartFailure(errorMessage: e.toString()));
     }
   }
+  int getCartItemCount() {
+    final cartBox = Hive.box<CartItemModel>(kCartBox);
+    return cartBox.length;
+  }
 }

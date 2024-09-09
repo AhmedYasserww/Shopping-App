@@ -27,7 +27,7 @@ class _NavigationBarState extends State<NavigationBar> {
             });
           },
           currentIndex: selectedIndex,
-          selectedItemColor: Colors.green,
+          selectedItemColor: Colors.blue,
           unselectedItemColor: Colors.grey,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home),label: "home"),
