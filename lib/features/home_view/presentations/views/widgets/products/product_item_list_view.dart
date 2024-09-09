@@ -12,15 +12,12 @@ class ProductItemListView extends StatelessWidget {
     return BlocBuilder<FetchTopProductsCubit,FetchTopProductsState>(
       builder: (context,state) {
         if(state is FetchTopProductSuccess){
-          return SizedBox(
-
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: state.product.length,
-                itemBuilder: (context,i){
-                  return ProductItem(productModel: state.product[i]);
-                }),
-          );
+          return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: state.product.length,
+              itemBuilder: (context,i){
+                return ProductItem(productModel: state.product[i]);
+              });
         }
         else if(state is FetchTopProductFailure){
           return CustomErrorWidget(errorMessage: state.errorMessage);

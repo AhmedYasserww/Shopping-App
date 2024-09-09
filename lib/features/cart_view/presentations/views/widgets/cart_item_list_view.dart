@@ -27,7 +27,7 @@ class CartItemListView extends StatelessWidget {
         else if(state is AddProductToCartSuccess){
           final cartProducts = state.cartProduct;
           if(cartProducts.isEmpty){
-            return const CustomEmptyScreen();
+            return const CustomEmptyScreen(message: 'No items added yet.',);
           }
           return ListView.builder(
             itemCount: state.cartProduct.length,
@@ -41,7 +41,7 @@ class CartItemListView extends StatelessWidget {
 
         }
         else{
-         return  const CustomEmptyScreen();
+         return  const CustomEmptyScreen(message: 'No items added yet.',);
         }
       },
 

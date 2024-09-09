@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoping_app/features/home_view/data/models/ProductModel.dart';
 
 import '../../../../../core/utils/styles.dart';
 class SearchItem extends StatelessWidget {
-  const SearchItem({super.key});
-
+  const SearchItem({super.key, required this.productModel});
+final ProductModel productModel ;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,19 +20,19 @@ class SearchItem extends StatelessWidget {
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
           child: Image.network(
-            "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
+           productModel.thumbnail??" ",
             width: 80.0,
             height: 80.0,
             fit: BoxFit.fill,
           ),
         ),
         title: Text(
-            "Essence Mascara Lash Princess",
+            productModel.title,
             style:Styles.textStyle16.copyWith( fontFamily: GoogleFonts.gabarito().fontFamily,fontWeight: FontWeight.bold,)
 
         ),
         subtitle: Text(
-            "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+          productModel.description?? " ",
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style:Styles.textStyle14.copyWith(fontFamily:GoogleFonts.gabarito().fontFamily, color: Colors.black54,)

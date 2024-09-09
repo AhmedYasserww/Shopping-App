@@ -15,6 +15,7 @@ import 'package:shoping_app/features/favorite_view/presentation/manager/add_prod
 
 import 'core/utils/service_locator.dart';
 import 'features/cart_view/presentations/manager/add_product_to_cart_cubit/add_product_to_cart_cubit.dart';
+import 'features/search_view/presentations/manager/search_for_product_cubit/search_for_product_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +47,11 @@ class MyApp extends StatelessWidget {
             BlocProvider<AddProductToCartCubit>(
               create: (context) => getIt<AddProductToCartCubit>(),
             ),
+
+            BlocProvider<SearchForProductCubit>(
+              create: (context) =>getIt<SearchForProductCubit>(),
+            ),
+
           ],
           child: MaterialApp.router(
             routerConfig: AppRouter.router,

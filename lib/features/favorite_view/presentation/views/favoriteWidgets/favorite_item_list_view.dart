@@ -21,7 +21,7 @@ class FavoriteItemListView extends StatelessWidget {
         } else if (state is AddProductToFavoriteSuccess) {
           final favoriteProducts = state.favoriteProducts;
           if (favoriteProducts.isEmpty) {
-            return const  CustomEmptyScreen();
+            return const  CustomEmptyScreen(message: 'No items added yet.',);
           }
           return ListView.builder(
             itemCount: favoriteProducts.length,
@@ -30,7 +30,7 @@ class FavoriteItemListView extends StatelessWidget {
             },
           );
         } else {
-          return const CustomEmptyScreen();
+          return const CustomEmptyScreen(message: 'No items added yet.',);
         }
       },
     );
