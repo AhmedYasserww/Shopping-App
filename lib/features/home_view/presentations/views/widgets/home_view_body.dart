@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shoping_app/core/utils/app_router.dart';
 import 'package:shoping_app/core/utils/styles.dart';
-import 'package:shoping_app/features/favorite_view/presentation/manager/add_product_to_favorite_cubit.dart';
 import 'package:shoping_app/features/home_view/data/repo/home_repo_impl.dart';
 import 'package:shoping_app/features/home_view/presentations/manager/featch_all_categories/fetch_all_categories_cubit.dart';
 import 'package:shoping_app/features/home_view/presentations/manager/fetch_top_products/fetch_top_products_cubit.dart';
@@ -30,11 +31,22 @@ class HomeViewBody extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.blue,
-          centerTitle: true,
+          //centerTitle: true,
           title: const Text(
             "Shopping App",
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
+          actions: [
+            Padding(
+              padding:const EdgeInsets.symmetric(horizontal: 8),
+              child: IconButton(onPressed:(){
+                GoRouter.of(context).push(AppRouter.kSearchView);
+              },
+                  icon:const Icon(Icons.search,color: Colors.black,
+                    size: 30,
+                  )),
+            )
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 8, left: 16, right: 16),

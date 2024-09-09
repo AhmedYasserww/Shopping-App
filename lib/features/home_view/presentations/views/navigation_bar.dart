@@ -11,10 +11,10 @@ class NavigationBar extends StatefulWidget {
 class _NavigationBarState extends State<NavigationBar> {
   int selectedIndex = 0 ;
 
-  List<Widget> views = [
+  List<Widget> views = const [
     HomeView(),
     CartView(),
-    const FavoriteView(),
+     FavoriteView(),
 
   ];
   @override

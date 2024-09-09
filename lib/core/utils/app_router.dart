@@ -6,7 +6,7 @@ import 'package:shoping_app/features/home_view/data/models/ProductModel.dart';
 import 'package:shoping_app/features/home_view/presentations/views/home_view.dart';
 import 'package:shoping_app/features/home_view/presentations/views/navigation_bar.dart';
 import 'package:shoping_app/features/home_view/presentations/views/widgets/products/home_view_product_details/product_details_view_body.dart';
-import '../../features/home_view/presentations/views/product_details_view.dart';
+import 'package:shoping_app/features/search_view/presentations/views/sarch_view.dart';
 import '../../features/home_view/presentations/views/widgets/categories/category_details_view_body.dart';
 import '../../features/onboardingscreen/presentations/views/boarding_view.dart';
 
@@ -19,6 +19,8 @@ abstract class AppRouter {
   static const kNavigationBar = '/navigationBar';
   static const kProductDetailsView = '/ProductDetailsViewBody';
   static const kCartView= '/cartView';
+  static const kSearchView= '/searchView';
+
 
 
 
@@ -62,6 +64,11 @@ abstract class AppRouter {
         GoRoute(
           path: AppRouter.kCartView,
           builder: (context, state) => const CartView()
+
+        ),
+        GoRoute(
+            path: AppRouter.kSearchView,
+            builder: (context, state) => const SearchView()
 
         ),
 
