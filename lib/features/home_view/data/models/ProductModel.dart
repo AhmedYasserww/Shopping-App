@@ -1,5 +1,6 @@
 import 'package:shoping_app/features/favorite_view/data/models/product_faviorite_model.dart';
 
+import '../../../cart_view/data/models/cart_item_model.dart';
 import 'Dimensions.dart';
 import 'Reviews.dart';
 import 'Meta.dart';
@@ -81,7 +82,9 @@ class ProductModel extends ProductFavoriteModel{
       thumbnail: json['thumbnail'],
     );
   }
-
+  CartItemModel toCartItemModel() {
+    return CartItemModel.fromProductModel(this);
+  }
   Map<String, dynamic> toJson() {
     return {
       'id': id,

@@ -9,21 +9,22 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shoping_app/constants.dart';
 import 'package:shoping_app/core/utils/app_router.dart';
+import 'package:shoping_app/features/cart_view/data/models/cart_item_model.dart';
 import 'package:shoping_app/features/favorite_view/data/models/product_faviorite_model.dart';
 import 'package:shoping_app/features/favorite_view/presentation/manager/add_product_to_favorite_cubit.dart';
 
 import 'core/utils/service_locator.dart';
-
+import 'features/cart_view/presentations/manager/add_product_to_cart_cubit/add_product_to_cart_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setupServiceLocator();
-  print("################");
-  print("################");
   await Hive.initFlutter();
   Hive.registerAdapter(ProductFavoriteModelAdapter());
+  Hive.registerAdapter(CartItemModelAdapter());
   await Hive.openBox<ProductFavoriteModel>(kFavoriteBox);
+  await Hive.openBox<CartItemModel>(kCartBox);
   runApp(const MyApp());
 }
 
@@ -41,6 +42,9 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider<AddProductToFavoriteCubit>(
               create: (context) => getIt<AddProductToFavoriteCubit>(),
+            ),
+            BlocProvider<AddProductToCartCubit>(
+              create: (context) => getIt<AddProductToCartCubit>(),
             ),
           ],
           child: MaterialApp.router(

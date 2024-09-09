@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoping_app/features/cart_view/presentations/views/widgets/cart_header.dart';
 import 'package:shoping_app/features/cart_view/presentations/views/widgets/cart_item.dart';
+import 'package:shoping_app/features/cart_view/presentations/views/widgets/cart_item_list_view.dart';
 import 'package:shoping_app/features/cart_view/presentations/views/widgets/checkout_button.dart';
 import 'package:shoping_app/features/cart_view/presentations/views/widgets/order_summary.dart';
 
@@ -34,15 +35,7 @@ class CartView extends StatelessWidget {
             const SizedBox(height: 20),
             // List of cart items
             Expanded(
-              child: ListView.builder(
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return CartItem(
-                    onRemove: () {},
-                    onAdd: () {},
-                  );
-                },
-              ),
+              child: CartItemListView(),
             ),
 
             const OrderSummary(),
@@ -54,3 +47,5 @@ class CartView extends StatelessWidget {
     );
   }
 }
+
+

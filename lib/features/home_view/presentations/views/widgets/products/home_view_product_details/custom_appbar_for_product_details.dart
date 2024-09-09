@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shoping_app/core/utils/app_router.dart';
 
 class CustomAppbarForProductDetails extends StatelessWidget {
   const CustomAppbarForProductDetails({super.key});
@@ -44,7 +46,7 @@ class CustomAppbarForProductDetails extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "cartView");
+                    GoRouter.of(context).push(AppRouter.kCartView);
                   },
                 ),
               ),

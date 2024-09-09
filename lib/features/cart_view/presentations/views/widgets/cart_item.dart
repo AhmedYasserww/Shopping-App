@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoping_app/core/utils/styles.dart';
+import '../../../data/models/cart_item_model.dart';
+import '../../manager/add_product_to_cart_cubit/add_product_to_cart_cubit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class CartItem extends StatelessWidget {
-  final VoidCallback onRemove;
-  final VoidCallback onAdd;
-
-  const CartItem({
-    required this.onRemove,
-    required this.onAdd,
-    super.key,
-  });
+  final CartItemModel cartItemModel;
+  const CartItem({super.key, required this.cartItemModel});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +20,12 @@ class CartItem extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            height: 110.h,
+            height: 110,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
                 fit: BoxFit.fill,
-                "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png",
+                cartItemModel.image,
                 width: width * 0.3,
                 height: width * 0.3,
               ),
@@ -38,9 +37,7 @@ class CartItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "title: T-shirt over size shorts (white / 2xl)",
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
+                  cartItemModel.title,
                   style: GoogleFonts.gabarito(
                     fontSize: 18,
                     color: Colors.grey.shade600,
@@ -48,30 +45,39 @@ class CartItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'price 19.6\u{20AC} ',
+                  '${cartItemModel.price}\$',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                   style: GoogleFonts.gabarito(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
                 const SizedBox(height: 10),
                 Row(
                   children: [
                     IconButton(
                       icon: const Icon(Icons.remove),
-                      onPressed: onRemove,
+                      onPressed: () {
+                        context
+                            .read<AddProductToCartCubit>()
+                            .decrementProduct(cartItemModel.title);
+                      },
                     ),
-                    const Text(
-                      '8',
-                      style: TextStyle(
+                    Text(
+                      cartItemModel.count.toString(),
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     IconButton(
                       icon: const Icon(Icons.add),
-                      onPressed: onAdd,
+                      onPressed: () {
+                        context
+                            .read<AddProductToCartCubit>()
+                            .incrementProduct(cartItemModel.title);
+                      },
                     ),
                   ],
                 ),
@@ -88,37 +94,49 @@ class CartItem extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                   color: Color(0xFFD8F2E5),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    "weight",
-                    style: TextStyle(
+                    "Weight",
+                    style: const TextStyle(
                       fontSize: 18,
-                      color: Color(0xFF08A455),
+                      color: Colors.blue,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 16),
               Container(
-                alignment: Alignment.center,
                 height: 35,
-                width: 35,
+                width: 45,
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   color: Colors.white,
-                  border: Border.all(
-                      color: Colors.grey,
-                    width: 2
-                  ),
-
+                  border: Border.all(color: Colors.grey, width: 2),
                 ),
-                child:  Text("8",style:Styles.textStyle18,),
+                child: Center(
+                  child: Text(
+                    cartItemModel.weight.toString(),
+                    style: GoogleFonts.gabarito(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
           const SizedBox(width: 5),
+          IconButton(onPressed: (){
+            BlocProvider.of<AddProductToCartCubit>(context).removeFromCart(cartItemModel.title);
+          },
+            icon: const Icon(
+            FontAwesomeIcons.trash,
+            color: Colors.blue,
+            size: 24.0,
+          ),)
         ],
       ),
     );

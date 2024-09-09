@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:shoping_app/features/auth/presentations/views/log_in_view.dart';
 import 'package:shoping_app/features/auth/presentations/views/register_view.dart';
+import 'package:shoping_app/features/cart_view/presentations/views/cart_view.dart';
 import 'package:shoping_app/features/home_view/data/models/ProductModel.dart';
 import 'package:shoping_app/features/home_view/presentations/views/home_view.dart';
 import 'package:shoping_app/features/home_view/presentations/views/navigation_bar.dart';
@@ -17,6 +18,9 @@ abstract class AppRouter {
   static const kCategoryDetailsView = '/categoryDetailsView';
   static const kNavigationBar = '/navigationBar';
   static const kProductDetailsView = '/ProductDetailsViewBody';
+  static const kCartView= '/cartView';
+
+
 
   static final router = GoRouter(
       routes: [
@@ -54,6 +58,11 @@ abstract class AppRouter {
             final productModel = state.extra as ProductModel;
             return ProductDetailsViewBody(productModel: productModel);
           },
+        ),
+        GoRoute(
+          path: AppRouter.kCartView,
+          builder: (context, state) => const CartView()
+
         ),
 
       ]);

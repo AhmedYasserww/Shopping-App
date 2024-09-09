@@ -1,4 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+
+import '../../../../../core/utils/styles.dart';
 
 class CheckoutButton extends StatelessWidget {
   final double width;
@@ -7,30 +11,16 @@ class CheckoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      child: ElevatedButton(
-        onPressed: null, // Add your onPressed function here
-        style: ButtonStyle(
-          fixedSize: WidgetStateProperty.all<Size>(
-            const Size(double.infinity, 60),
-          ),
-          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-              side: const BorderSide(color: Color(0xFF00AA5A)),
-            ),
-          ),
-          backgroundColor:
-              WidgetStateProperty.all<Color>(const Color(0xFF00AA5A)),
-        ),
-        child: const Text(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(18),
+      child: Container(
+        alignment: Alignment.center,
+        color: Colors.blue,
+        width: double.infinity,
+        height: 60,
+        child:  Text(
           'Checkout',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          style: Styles.textStyle20.copyWith(color: Colors.white,fontWeight: FontWeight.bold)
         ),
       ),
     );
