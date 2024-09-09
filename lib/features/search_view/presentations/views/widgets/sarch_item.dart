@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoping_app/features/home_view/data/models/ProductModel.dart';
 
+import '../../../../../core/utils/app_router.dart';
 import '../../../../../core/utils/styles.dart';
 class SearchItem extends StatelessWidget {
   const SearchItem({super.key, required this.productModel});
@@ -39,7 +41,7 @@ final ProductModel productModel ;
 
         ),
         onTap: () {
-          print("ahmed");
+         GoRouter.of(context).push(AppRouter.kProductDetailsView,extra: productModel);
         },
       ),
     );

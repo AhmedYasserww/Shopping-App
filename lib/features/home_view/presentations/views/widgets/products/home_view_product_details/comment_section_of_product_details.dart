@@ -15,21 +15,23 @@ class CommentsSectionOfProductDetails extends StatelessWidget {
           "Comments : ",
           style: Styles.textStyle24.copyWith(fontWeight: FontWeight.w600),
         ),
+       const SizedBox(height: 8,),
         if (productModel.reviews != null && productModel.reviews!.isNotEmpty)
 
           SizedBox(
-            height: 150,
+            height: 130,
             child: ListView.builder(
+              padding: EdgeInsets.zero,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: productModel.reviews!.length,
               itemBuilder: (context, index) {
                 final review = productModel.reviews![index];
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 6),
                   child: Text(
                     review.comment ?? "No Comment",
-                    style: Styles.textStyle20.copyWith(fontWeight: FontWeight.w500),
+                    style: Styles.textStyle18.copyWith(fontWeight: FontWeight.w500),
                     //   maxLines: 2,
 
                   ),

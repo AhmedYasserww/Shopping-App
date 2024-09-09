@@ -51,6 +51,7 @@ dependencies:
   hive:
   hive_flutter:
   font_awesome_flutter: ^10.7.0
+  cached_network_image:
 
 dev_dependencies:
   hive_generator:

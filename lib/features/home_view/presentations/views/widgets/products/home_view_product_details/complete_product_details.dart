@@ -24,7 +24,7 @@ class _CompleteProductDetailsState extends State<CompleteProductDetails> {
   void initState() {
     super.initState();
     images = widget.productModel.images ?? [];
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         setState(() {
           isLoading = false;

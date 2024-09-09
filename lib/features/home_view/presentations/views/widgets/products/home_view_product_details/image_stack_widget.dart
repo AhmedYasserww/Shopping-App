@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:cached_network_image/cached_network_image.dart'; // Import the package
 
 import 'custom_appbar_for_product_details.dart';
+
 class ImageStackWidget extends StatelessWidget {
   final PageController pageController;
   final List<String> images;
@@ -10,7 +12,7 @@ class ImageStackWidget extends StatelessWidget {
     super.key,
     required this.pageController,
     required this.images,
-  }) ;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,12 @@ class ImageStackWidget extends StatelessWidget {
           child: PageView(
             controller: pageController,
             children: images
-                .map((imageUrl) => Image.network(imageUrl, fit: BoxFit.fill))
+                .map((imageUrl) => CachedNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.fill,
+              placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
+            ))
                 .toList(),
           ),
         ),
@@ -48,10 +55,8 @@ class ImageStackWidget extends StatelessWidget {
             ),
           ),
         ),
-
         const CustomAppbarForProductDetails(),
       ],
     );
   }
 }
-

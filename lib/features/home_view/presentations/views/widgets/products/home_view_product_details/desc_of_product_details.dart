@@ -16,13 +16,12 @@ class DescOfProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Create a CartItemModel from the ProductModel
     final cartItemModel = CartItemModel(
       weight: productModel.weight??0,
-      productId: productModel.id.toString(),  // Assuming 'id' is available in ProductModel
+      productId: productModel.id.toString(),
       title: productModel.title,
       price: productModel.price,
-      image: productModel.thumbnail??"", // Assuming 'image' is available in ProductModel
+      image: productModel.thumbnail??"",
       count: 1, // Initial quantity
     );
 
@@ -44,7 +43,7 @@ class DescOfProductDetails extends StatelessWidget {
                   style: Styles.textStyle24,
                 ),
                 Text(
-                  productModel.price.toString(),
+    '${productModel.price.toString()}\$',
                   style: Styles.textStyle20.copyWith(color: Colors.blue),
                 ),
               ],
@@ -83,6 +82,9 @@ class DescOfProductDetails extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
+            Text("QR Code : ",style: Styles.textStyle24.copyWith(fontWeight: FontWeight.w600)),
+            const SizedBox(height: 10),
+
             Center(
               child: SizedBox(
                 height: 150,
@@ -93,8 +95,6 @@ class DescOfProductDetails extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             CommentsSectionOfProductDetails(productModel: productModel),
-            const SizedBox(height: 20),
-            // Pass the cartItemModel to BottomAddToCart
             BottomAddToCart(cartItemModel: cartItemModel),
           ],
         ),
