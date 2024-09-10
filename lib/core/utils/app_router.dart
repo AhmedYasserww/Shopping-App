@@ -6,20 +6,21 @@ import 'package:shoping_app/features/home_view/data/models/ProductModel.dart';
 import 'package:shoping_app/features/home_view/presentations/views/home_view.dart';
 import 'package:shoping_app/features/home_view/presentations/views/navigation_bar.dart';
 import 'package:shoping_app/features/home_view/presentations/views/widgets/products/home_view_product_details/product_details_view_body.dart';
+import 'package:shoping_app/features/onboardingscreen/presentations/views/splash_view.dart';
 import 'package:shoping_app/features/search_view/presentations/views/sarch_view.dart';
 import '../../features/home_view/presentations/views/widgets/categories/category_details_view_body.dart';
-import '../../features/onboardingscreen/presentations/views/boarding_view.dart';
+import '../../features/onboardingscreen/presentations/views/on_boarding_view.dart';
 
 abstract class AppRouter {
   static const kRegister = '/register';
   static const kLogin = '/login';
-  static const kSplashScreen = '/splashScreen';
   static const kHomeView = '/homeView';
   static const kCategoryDetailsView = '/categoryDetailsView';
   static const kNavigationBar = '/navigationBar';
   static const kProductDetailsView = '/ProductDetailsViewBody';
   static const kCartView= '/cartView';
   static const kSearchView= '/searchView';
+  static const kOnboardingView = '/onBoardingView';
 
 
 
@@ -28,7 +29,7 @@ abstract class AppRouter {
       routes: [
         GoRoute(
           path: '/',
-          builder: (context, state) => const BoardingView()
+          builder: (context, state) => const SplashView()
         ),
         GoRoute(
             path:kLogin,
@@ -69,6 +70,11 @@ abstract class AppRouter {
         GoRoute(
             path: AppRouter.kSearchView,
             builder: (context, state) => const SearchView()
+
+        ),
+        GoRoute(
+            path: AppRouter.kOnboardingView,
+            builder: (context, state) => const BoardingView()
 
         ),
 

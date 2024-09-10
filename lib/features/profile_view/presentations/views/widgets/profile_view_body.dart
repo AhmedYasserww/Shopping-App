@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shoping_app/core/utils/app_router.dart';
-import 'package:shoping_app/features/person_view/presentations/views/widgets/profile_header.dart';
-import 'package:shoping_app/features/person_view/presentations/views/widgets/profile_info_row.dart';
-import 'package:shoping_app/features/person_view/presentations/views/widgets/profile_password_row.dart';
+import 'package:shoping_app/features/profile_view/presentations/views/widgets/profile_header.dart';
+import 'package:shoping_app/features/profile_view/presentations/views/widgets/profile_info_row.dart';
+import 'package:shoping_app/features/profile_view/presentations/views/widgets/profile_password_row.dart';
 import '../../../../auth/data/save_data.dart';
 import 'custom_app_bar_profile.dart'; //
 
@@ -61,33 +61,47 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
           ),
           const SizedBox(height: 5),
           const SizedBox(height: 20),
-          ProfileInfoRow(
-            icon: Icons.email,
-            label: 'Email',
-            value: userData['email'] ?? 'N/A',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: ProfileInfoRow(
+              icon: Icons.email,
+              label: 'Email',
+              value: userData['email'] ?? 'N/A',
+            ),
           ),
           const SizedBox(height: 15),
-          ProfileInfoRow(
-            icon: Icons.phone,
-            label: 'Phone Number',
-            value: userData['phoneNumber'] ?? 'N/A',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+
+            child: ProfileInfoRow(
+              icon: Icons.phone,
+              label: 'Phone Number',
+              value: userData['phoneNumber'] ?? 'N/A',
+            ),
           ),
           const SizedBox(height: 15),
-          ProfileInfoRow(
-            icon: Icons.link,
-            label: 'Website',
-            value: 'www.${_extractEmailPartFromUserData(userData['email'])}',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+
+            child: ProfileInfoRow(
+              icon: Icons.link,
+              label: 'Website',
+              value: 'www.${_extractEmailPartFromUserData(userData['email'])}',
+            ),
           ),
           const SizedBox(height: 15),
-          ProfilePasswordRow(
-            label: 'Password',
-            value: userData['password'] ?? 'N/A',
-            isVisible: isVisible,
-            onToggleVisibility: () {
-              setState(() {
-                isVisible = !isVisible;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: ProfilePasswordRow(
+              label: 'Password',
+              value: userData['password'] ?? 'N/A',
+              isVisible: isVisible,
+              onToggleVisibility: () {
+                setState(() {
+                  isVisible = !isVisible;
+                });
+              },
+            ),
           ),
           const SizedBox(height: 30),
           ElevatedButton(

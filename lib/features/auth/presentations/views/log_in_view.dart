@@ -1,12 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shoping_app/core/utils/styles.dart';
-import 'package:shoping_app/features/auth/presentations/views/register_view.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_button_details.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_email_text_field.dart';
 import 'package:shoping_app/features/auth/presentations/views/widgets/custom_password_text_field.dart';
-
 import '../../../../core/utils/app_router.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -18,7 +15,6 @@ class LogInScreen extends StatefulWidget {
 
 class _LogInScreenState extends State<LogInScreen> {
   bool visible = true;
-  String? userToken;
   final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
@@ -27,17 +23,8 @@ class _LogInScreenState extends State<LogInScreen> {
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
-   // getToken();
     super.initState();
-
   }
-  // getToken() async {
-  //  // final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   //userToken = prefs.getString('userToken');
-  //   print("**********");
-  //   log(userToken.toString());
-  //   print("*********");
-  // }
 
   @override
   void dispose() {
@@ -50,7 +37,6 @@ class _LogInScreenState extends State<LogInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-     // appBar:AppBar(title:Text("login"),),
       body: Form(
         key: globalKey,
         child: SingleChildScrollView(
@@ -58,21 +44,21 @@ class _LogInScreenState extends State<LogInScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                const SizedBox(height:60,),
+                const SizedBox(height: 60),
                 const Text(
                   "Login",
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 30,),
+                const SizedBox(height: 30),
                 SizedBox(
-                  height: 184,
+                    height: 184,
                     width: 286,
                     child: Image(image: AssetImage("assets/images/log_in.jpg"))),
-                SizedBox(height: 21,),
-
+                SizedBox(height: 21),
                 EmailField(emailController: emailController),
-                const SizedBox(height: 30,),
-                PasswordField(passwordController: passwordController,
+                const SizedBox(height: 30),
+                PasswordField(
+                  passwordController: passwordController,
                   visible: visible,
                   toggleVisibility: () {
                     setState(() {
@@ -80,68 +66,21 @@ class _LogInScreenState extends State<LogInScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: 30,),
+                const SizedBox(height: 30),
                 CustomButtonDetails(
-                  onTap: () async {
-                    if (globalKey.currentState!.validate()) {
-                      try {
-                        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-
-                        User? user = userCredential.user;
-                        if (user != null) {
-                          if (!user.emailVerified) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: const Text('Email not verified. Please check your email for verification.'),
-                                action: SnackBarAction(
-                                  label: 'Resend Verification',
-                                  onPressed: () async {
-                                    await user.sendEmailVerification();
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text('Verification email resent!'),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Log in successful'),
-                              ),
-                            );
-
-                             GoRouter.of(context).push(AppRouter.kNavigationBar);
-                          }
-                        }
-                      } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Login failed: ${e.toString()}'),
-                          ),
-                        );
-                      }
-                    }
-                  },
-
+                  onTap: () => _handleLogin(context),
                   globalKey: globalKey,
                   emailController: emailController,
                   passwordController: passwordController,
                   text: "Log In",
                 ),
-                const SizedBox(height: 15,),
+                const SizedBox(height: 15),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
+                   const Expanded(
                       flex: 2,
                       child: const Text(
-                        "Don't have an account ?",
+                        "Don't have an account?",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
@@ -149,20 +88,79 @@ class _LogInScreenState extends State<LogInScreen> {
                       flex: 1,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.push(context,MaterialPageRoute(builder:(context)=>const RegisterScreen()),);
+                          GoRouter.of(context).push(AppRouter.kRegister);
                         },
-                        child:  Text(
+                        child: const Text(
                           "Register",
-                          style:Styles.textStyle20.copyWith(color: Colors.blue)
+                          style: TextStyle(fontSize: 22,color: Colors.blue),
                         ),
                       ),
                     ),
                   ],
                 ),
+                const SizedBox(height: 50),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Future<void> _handleLogin(BuildContext context) async {
+    if (globalKey.currentState!.validate()) {
+      try {
+        await _signInUser(context);
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Login failed: ${e.toString()}'),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _signInUser(BuildContext context) async {
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+
+    User? user = userCredential.user;
+    if (user != null) {
+      if (!user.emailVerified) {
+        await _handleEmailNotVerified(user, context);
+      } else {
+        _showLoginSuccessMessage(context);
+        GoRouter.of(context).push(AppRouter.kNavigationBar);
+      }
+    }
+  }
+
+  Future<void> _handleEmailNotVerified(User user, BuildContext context) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Email not verified. Please check your email for verification.'),
+        action: SnackBarAction(
+          label: 'Resend Verification',
+          onPressed: () async {
+            await user.sendEmailVerification();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Verification email resent!'),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  void _showLoginSuccessMessage(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Log in successful'),
       ),
     );
   }

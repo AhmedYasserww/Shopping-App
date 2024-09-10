@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shoping_app/features/home_view/presentations/views/home_view.dart';
-import 'package:shoping_app/features/person_view/presentations/views/profile_view.dart';
-
 import '../../../cart_view/presentations/views/cart_view.dart';
 import '../../../favorite_view/presentation/views/faviorite_view.dart';
+import '../../../profile_view/presentations/views/profile_view.dart';
 class NavigationBar extends StatefulWidget {
   const NavigationBar({super.key});
   @override

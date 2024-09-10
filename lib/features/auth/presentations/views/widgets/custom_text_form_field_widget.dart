@@ -40,7 +40,7 @@ class CustomTextField extends StatelessWidget {
              labelStyle:const TextStyle(fontSize: 24,color: Color(0xff11D8EF)),
 
               hintStyle:const TextStyle(fontSize: 20),
-      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
+      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
            focusedBorder: buildBorder(Colors.blue),
             errorBorder: buildBorder(Colors.red),
             focusedErrorBorder: buildBorder(Colors.red),
@@ -52,7 +52,7 @@ class CustomTextField extends StatelessWidget {
   }
    OutlineInputBorder buildBorder([color]){
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(32),
+      borderRadius: BorderRadius.circular(16),
       borderSide: BorderSide(color: color ?? Colors.white,width: 1.2),
     );
    }

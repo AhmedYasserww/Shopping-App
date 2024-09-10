@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -69,15 +71,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     width: 286,
                     child:
                         Image(image: AssetImage("assets/images/register.jpg"))),
-               const SizedBox(
+                const SizedBox(
                   height: 21,
                 ),
                 NameField(nameController: nameController),
-               const SizedBox(
+                const SizedBox(
                   height: 21,
                 ),
                 PhoneNumberField(nameController: phoneNumberController),
-               const SizedBox(
+                const SizedBox(
                   height: 21,
                 ),
                 EmailField(emailController: emailController),
@@ -93,118 +95,77 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 21),
                 CustomButtonDetails(
-                  //onTap: () {},
                   globalKey: globalKey,
                   emailController: emailController,
                   passwordController: passwordController,
                   text: "Register",
                   onTap: () async {
-                    if (globalKey.currentState!.validate()) {
-                      try {
-                        print("###########################");
-                        print("###########################");
-                        print("Before saving data");
-                        await saveUserData(
-                          name: nameController.text,
-                          email: emailController.text,
-                          phoneNumber: phoneNumberController.text,
-                          password: passwordController.text,
-                        );
-                        print("###########################");
-                        print("###########################");
-                        print("After saving data");
-
-                        Map<String, String?> userData = await getUserData();
-                        print("###########################");
-                        print("###########################");
-                        print("User data retrieved:");
-                        print(userData['name']);
-                        print(userData['email']);
-                        print(userData['phoneNumber']);
-                        print(userData['password']);
-
-                        UserCredential userCredential = await FirebaseAuth
-                            .instance
-                            .createUserWithEmailAndPassword(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                        print("User registered");
-
-                        User? user = userCredential.user;
-                        if (user != null && !user.emailVerified) {
-                          await user.sendEmailVerification();
-                          print("###########################");
-                          print("###########################");
-                          print("Verification email sent");
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                  'Verification email sent! Please check your inbox.'),
-                            ),
-                          );
-                          GoRouter.of(context).push(AppRouter.kLogin);
-                        }
-                      } catch (e) {
-                        print("Error during registration: ${e.toString()}");
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content:
-                                Text('Registration failed: ${e.toString()}'),
-                          ),
-                        );
-                      }
-                    }
-
-                    // await saveUserData(
-                    //   name: nameController.text,
-                    //   email: emailController.text,
-                    //   phoneNumber: phoneNumberController.text,
-                    //   password: passwordController.text,
-                    // );
-
-// To retrieve and display data on the profile screen
-                    Map<String, String?> userData = await getUserData();
-                    print("###########################");
-                    print("###########################");
-
-                    print(
-                        userData['name']); // Display or use the data as needed
-                    print("###########################");
+                    await _handleRegistration();
                   },
                 ),
                 const LoginNavigation(),
-                TextButton(
-                  onPressed: () {},
-                  /* onPressed: () async {
-                    try {
-                      await FirebaseAuth.instance.sendPasswordResetEmail(
-                        email: emailController.text,
-                      );
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Password reset email sent! Please check your inbox.'),
-                        ),
-                      );
-                    } catch (e) {
-                      // Handle errors, such as invalid email
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Error: ${e.toString()}'),
-                        ),
-                      );
-                    }
-                  },*/
-                  child: const Text(
-                    "Reset Password",
-                    style: TextStyle(fontSize: 22),
-                  ),
-                )
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Future<void> _handleRegistration() async {
+    if (globalKey.currentState!.validate()) {
+      try {
+        await _saveUserData();
+        await _registerUser();
+      } catch (e) {
+        _showSnackBar('Registration failed: ${e.toString()}');
+      }
+    }
+  }
+
+  Future<void> _saveUserData() async {
+    log("###########################");
+    log("Before saving data");
+    await saveUserData(
+      name: nameController.text,
+      email: emailController.text,
+      phoneNumber: phoneNumberController.text,
+      password: passwordController.text,
+    );
+    log("###########################");
+    log("After saving data");
+
+    Map<String, String?> userData = await getUserData();
+    log("###########################");
+    log("User data retrieved:");
+    (userData['name']);
+    print(userData['email']);
+    (userData['phoneNumber']);
+    print(userData['password']);
+  }
+
+  Future<void> _registerUser() async {
+    UserCredential userCredential =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+    log("User registered");
+
+    User? user = userCredential.user;
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+      log("###########################");
+      log("Verification email sent");
+      _showSnackBar('Verification email sent! Please check your inbox.');
+      GoRouter.of(context).push(AppRouter.kLogin);
+    }
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
       ),
     );
   }

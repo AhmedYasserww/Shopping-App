@@ -15,9 +15,9 @@ class LoginNavigation extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text(
+          child:  const Text(
             "LogIn",
-            style: TextStyle(fontSize: 28),
+            style: TextStyle(fontSize: 24,color: Colors.blue,fontWeight:FontWeight.bold ),
           ),
         ),
       ],

@@ -24,7 +24,7 @@ class CustomButtonDetails extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: Colors.blue,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(16),
         ),
         height: 50,
         width: double.infinity,
@@ -36,40 +36,3 @@ class CustomButtonDetails extends StatelessWidget {
     );
   }
 }
-/*
-() async{
-        if (globalKey.currentState!.validate()) {
-          print(emailController.text);
-          print(passwordController.text);
-        //  print('Validation passed');
-        /*  ApiService().userLogin(
-            userName: emailController.text,
-            password: passwordController.text,
-          )
-              .then((onValue) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(onValue.toString())),
-            );
-          });*/
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-              email:emailController.text ,
-              password: passwordController.text
-          ) .then((onValue) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("logIn Success"),
-            )
-            );
-            print(onValue.user!.email);
-            print(onValue.user!.emailVerified);
-            print(onValue.user!.uid);
-
-
-          }).catchError((onError){
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("logIn Failed"),
-                ));
-            print(onError.toString());
-             });
-          }
-      },
- */
