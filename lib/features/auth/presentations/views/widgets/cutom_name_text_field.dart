@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'custom_text_form_field_widget.dart';
 class NameField extends StatelessWidget {
   final TextEditingController nameController;

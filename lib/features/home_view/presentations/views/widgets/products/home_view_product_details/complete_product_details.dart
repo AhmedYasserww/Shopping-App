@@ -61,7 +61,7 @@ class _CompleteProductDetailsState extends State<CompleteProductDetails> {
             child: const CustomLoadingIndicator())
             : ImageStackWidget(
           pageController: _pageController,
-          images: images.isNotEmpty ? images : ['https://via.placeholder.com/400'], // Default image if empty
+          images: images.isNotEmpty ? images : ['https://via.placeholder.com/400'],
         ),
         Expanded(
           child: Container(
@@ -73,7 +73,7 @@ class _CompleteProductDetailsState extends State<CompleteProductDetails> {
                 topRight: Radius.circular(15),
               ),
             ),
-            child: DescOfProductDetails(productModel: widget.productModel,), // Product details section
+            child: DescOfProductDetails(productModel: widget.productModel,),
           ),
         ),
       ],

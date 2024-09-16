@@ -16,7 +16,6 @@ class FetchSpecificProductCubit extends Cubit<FetchSpecificProductState> {
       var data = await homeRepoImpl.fetchSpecificProduct(category: category);
       data.fold(
             (failure) {
-          // Handle the failure case, maybe emit an empty list or show an error
           print('Error: ${failure.errorMessage}');
           emit(FetchSpecificProductFailure(errorMessage: failure.errorMessage));
         },

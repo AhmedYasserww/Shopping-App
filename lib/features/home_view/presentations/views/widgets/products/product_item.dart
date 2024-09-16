@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shoping_app/core/utils/app_router.dart';
 import 'package:shoping_app/core/utils/styles.dart';
@@ -24,10 +25,10 @@ class ProductItem extends StatelessWidget {
         GoRouter.of(context).push(AppRouter.kProductDetailsView, extra: productModel);
       },
       child: Padding(
-        padding: EdgeInsets.only(right: 10),
+        padding: const EdgeInsets.only(right: 10),
         child: Container(
           color: Colors.grey[200],
-          width: 200,
+          width: 200.w,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,7 +37,7 @@ class ProductItem extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                      width: 200, // Adjust width as needed
+                      width: 200.w,
                       height: heightOfImage,
                       decoration: BoxDecoration(
                         image: DecorationImage(

@@ -22,11 +22,8 @@ class AddProductToCartCubit extends Cubit<AddProductToCartState> {
       } else {
         await cartBox.add(cartProduct);
       }
-
-      // Emit success state with the updated cart list
       emit(AddProductToCartSuccess(cartProduct: cartBox.values.toList()));
     } on Exception catch (e) {
-      // Emit failure state if any error occurs
       emit(AddProductToCartFailure(errorMessage: e.toString()));
     }
   }
@@ -99,10 +96,8 @@ class AddProductToCartCubit extends Cubit<AddProductToCartState> {
         await cartBox.deleteAt(itemIndex);
       }
 
-      // Emit success state with updated cart list
       emit(AddProductToCartSuccess(cartProduct: cartBox.values.toList()));
     } on Exception catch (e) {
-      // Emit failure state if any error occurs
       emit(AddProductToCartFailure(errorMessage: e.toString()));
     }
   }

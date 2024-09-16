@@ -125,14 +125,12 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
     );
   }
 
-  // Helper to get initials
   String _getInitials(String name) {
     final parts = name.split(' ');
     final initials = parts.map((part) => part.isNotEmpty ? part[0] : '').take(2).join();
     return initials.toUpperCase();
   }
 
-  // Helper to extract the part after @ in email
   String _extractEmailPartFromUserData(String? email) {
     if (email == null || !email.contains('@')) return 'N/A';
     return email.split('@').last;

@@ -23,12 +23,7 @@ class CustomTextField extends StatelessWidget {
         obscureText:obscureText,
         onSaved:onSaved ,
         onChanged: onChange,
-
         validator: validator,
-
-
-
-
           decoration:InputDecoration(
             fillColor:fillColor ,
               filled: filled,

@@ -37,7 +37,6 @@ class _SearchViewBodyState extends State<SearchViewBody> {
                 child: CustomTextField(
                   onChange: (value) {
                     BlocProvider.of<SearchForProductCubit>(context).searchForProduct(value.toString());
-                  //  context.read<SearchForProductCubit>().searchForProduct(value.toString());
                   },
                   controller: searchController,
                   filled: true,
@@ -56,7 +55,6 @@ class _SearchViewBodyState extends State<SearchViewBody> {
                     ),
                     onPressed: () {
                       searchController.clear();
-                    //  context.read<SearchForProductCubit>().searchForProduct('');
                       BlocProvider.of<SearchForProductCubit>(context).searchForProduct('');
                     },
                   ),

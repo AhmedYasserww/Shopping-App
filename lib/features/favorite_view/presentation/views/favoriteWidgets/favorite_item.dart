@@ -33,8 +33,7 @@ class FavoriteItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: Image.network(
-              product.image, // Use the product's image URL
-              width: 100,
+              product.image,
               height: 100,
               fit: BoxFit.fill,
             ),
@@ -45,7 +44,7 @@ class FavoriteItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  product.title, // Use the product's title
+                  product.title,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: const TextStyle(
@@ -56,7 +55,7 @@ class FavoriteItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  product.content, // Use the product's description
+                  product.content,
                   style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -67,7 +66,7 @@ class FavoriteItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${product.price} \$', // Concatenated price and currency
+                        '${product.price} \$',
                         style: Styles.textStyle18,
                       ),
                       IconButton(

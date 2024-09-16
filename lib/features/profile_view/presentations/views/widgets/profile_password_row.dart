@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-// profile_password_row.dart
-import 'package:flutter/material.dart';
-
 class ProfilePasswordRow extends StatelessWidget {
   final String label;
   final String value;
@@ -9,18 +6,18 @@ class ProfilePasswordRow extends StatelessWidget {
   final VoidCallback onToggleVisibility;
 
   const ProfilePasswordRow({
-    Key? key,
+    super.key,
     required this.label,
     required this.value,
     required this.isVisible,
     required this.onToggleVisibility,
-  }) : super(key: key);
+  }) ;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.lock, color: Colors.grey),
+        const Icon(Icons.lock, color: Colors.grey),
         const SizedBox(width: 15),
         Expanded(
           child: Column(
@@ -38,8 +35,8 @@ class ProfilePasswordRow extends StatelessWidget {
         IconButton(
           onPressed: onToggleVisibility,
           icon: isVisible
-              ? Icon(Icons.visibility, color: Colors.grey)
-              : Icon(Icons.visibility_off, color: Colors.grey),
+              ? const Icon(Icons.visibility, color: Colors.grey)
+              : const Icon(Icons.visibility_off, color: Colors.grey),
         ),
       ],
     );

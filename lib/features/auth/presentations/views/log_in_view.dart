@@ -50,11 +50,11 @@ class _LogInScreenState extends State<LogInScreen> {
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 30),
-                SizedBox(
+                const SizedBox(
                     height: 184,
                     width: 286,
                     child: Image(image: AssetImage("assets/images/log_in.jpg"))),
-                SizedBox(height: 21),
+                const SizedBox(height: 21),
                 EmailField(emailController: emailController),
                 const SizedBox(height: 30),
                 PasswordField(

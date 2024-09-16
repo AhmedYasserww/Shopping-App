@@ -45,12 +45,11 @@ class CartItemModel {
 
   double get totalPrice => price * count;
 
-  // Factory constructor to create CartItemModel from ProductModel
   factory CartItemModel.fromProductModel(ProductModel product) {
     return CartItemModel(
       productId: product.id.toString(),
       title: product.title,
-      image: product.thumbnail ?? '',  // Use thumbnail or a default image
+      image: product.thumbnail ?? '',
       weight: product.weight ?? 0,
       price: product.price,
     );

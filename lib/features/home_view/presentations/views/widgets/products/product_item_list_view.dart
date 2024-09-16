@@ -23,7 +23,7 @@ class ProductItemListView extends StatelessWidget {
           return CustomErrorWidget(errorMessage: state.errorMessage);
         }
         else{
-          return CustomLoadingIndicator();
+          return const CustomLoadingIndicator();
         }
 
       }
