@@ -1,16 +1,9 @@
-# shoping_app
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The Shopping App is designed to display products with a smooth and responsive user interface.
+ Key features include:
+Simple Animations: Enhances the user experience from the start.
+Login and Sign Up: Secure user access via Firebase Authentication.
+Home Page: Showcases all available products.
+Shopping Cart: Allows users to add and manage products easily.
+Favorites Section: Save preferred items for quick access.
+Search Feature: Quickly find products by keywords.
+Profile Page: Displays user details after login or sign-up
