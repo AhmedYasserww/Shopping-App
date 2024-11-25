@@ -9,8 +9,6 @@ import 'package:shoping_app/features/home_view/presentations/views/widgets/produ
 import 'package:shoping_app/features/onboardingscreen/presentations/views/splash_view.dart';
 import 'package:shoping_app/features/search_view/presentations/views/sarch_view.dart';
 import '../../features/home_view/presentations/views/widgets/categories/category_details_view_body.dart';
-import '../../features/onboardingscreen/presentations/views/on_boarding_view.dart';
-
 abstract class AppRouter {
   static const kRegister = '/register';
   static const kLogin = '/login';
@@ -70,11 +68,6 @@ abstract class AppRouter {
         GoRoute(
             path: AppRouter.kSearchView,
             builder: (context, state) => const SearchView()
-
-        ),
-        GoRoute(
-            path: AppRouter.kOnboardingView,
-            builder: (context, state) => const BoardingView()
 
         ),
 

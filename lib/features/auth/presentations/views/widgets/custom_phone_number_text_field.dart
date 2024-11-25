@@ -18,7 +18,7 @@ class PhoneNumberField extends StatelessWidget {
         }
         return null;
       },
-      prefixIcon: const Icon(Icons.person),
+      prefixIcon: const Icon(Icons.phone),
       labelText: 'Phone Number',
     );
   }
